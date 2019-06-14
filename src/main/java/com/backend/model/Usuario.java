@@ -1,9 +1,16 @@
 package com.backend.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Usuario {
 	private String primeiroNome;
 	private String ultimoNome;
+	
+	@Id
 	private String email;
+	
 	private String password;
 	public Usuario (String primeiroNome,String ultimoNome,String email,String password) {
 		this.primeiroNome = primeiroNome;
