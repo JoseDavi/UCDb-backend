@@ -14,7 +14,7 @@ public class UsuarioService {
 		this.usuarioDAO = usuarioDAO;
 	}
 	
-	public Usuario salve(Usuario usuario) {
+	public Usuario save(Usuario usuario) {
 		return usuarioDAO.save(usuario);
 	}
 	
