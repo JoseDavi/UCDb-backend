@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.exceptions.usuarioAlreadyExistsException;
 import com.backend.exceptions.usuarioNotFoundException;
 import com.backend.model.Usuario;
 import com.backend.service.UsuarioService;
@@ -38,6 +39,10 @@ public class UsuarioController {
 	@PostMapping(value = "/")
 	@ResponseBody
 	public ResponseEntity<Usuario> save(@RequestBody Usuario usuario) {
+		Usuario check = this.usuarioService.findByemail(usuario.getEmail());
+		if(check != null) {
+			throw new usuarioAlreadyExistsException("Usuario já existe!");
+		}
 		Usuario newUsuario = this.usuarioService.save(usuario);
 		
 		if (newUsuario == null) {
