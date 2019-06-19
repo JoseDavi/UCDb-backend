@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.exceptions.usuarioNotFoundException;
 import com.backend.model.Usuario;
 import com.backend.service.UsuarioService;
 
@@ -33,11 +34,11 @@ public class LoginController {
 		
 		// verificacoes
 		if(authUser == null) {
-			throw new ServletException("Usuario nao encontrado!");
+			throw new usuarioNotFoundException("Usuario nao encontrado!");
 		}
 		
 		if(!authUser.getPassword().equals(user.getPassword())) {
-			throw new ServletException("Senha invalida!");
+			throw new usuarioNotFoundException("Senha invalida!");
 		}
 		
 		String token = Jwts.builder().
