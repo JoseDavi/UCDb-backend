@@ -10,8 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.backend.model.Disciplina;
 @Repository
 public interface DisciplinaDAO<T ,ID extends Serializable> extends JpaRepository<Disciplina, Long> {
-	
-	@Query("SELECT d FROM Disciplina d WHERE d.nome like '%discname%'")
+	@Query("SELECT d FROM Disciplina d WHERE d.nome LIKE CONCAT('%', :discname, '%')")
 	public Disciplina findLikeName(@Param("discname") String nome);
 	
 	

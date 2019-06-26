@@ -1,5 +1,6 @@
 package com.backend.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -26,6 +27,7 @@ public class Disciplina {
 	public Disciplina (long id,String nome) {
 		this.id = id;
 		this.nome = nome;
+		this.likes = new ArrayList<Usuario>();
 	}
 
 	public long getId() {

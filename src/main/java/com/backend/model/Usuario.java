@@ -1,5 +1,6 @@
 package com.backend.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -23,6 +24,7 @@ public class Usuario {
 		this.ultimoNome = ultimoNome;
 		this.email = email;
 		this.password = password;
+		this.disciplinasComLikes = new ArrayList<Disciplina>();
 	}
 
 	public String getPrimeiroNome() {

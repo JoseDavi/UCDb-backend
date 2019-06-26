@@ -16,7 +16,9 @@ public class DisciplinaService {
 	public Disciplina save(Disciplina disciplina) {
 		return disciplinaDAO.save(disciplina);
 	}
-	
+	public Disciplina findById(long id) {
+		return disciplinaDAO.findById(id);
+	}
 	public Disciplina curtiu(long id, String email) {
 		Disciplina disciplina_auxiliar = disciplinaDAO.findById(id);
 		Usuario usuario_auxiliar = usuarioDAO.findByemail(email);
@@ -27,6 +29,9 @@ public class DisciplinaService {
 		}
 		return disciplinaDAO.save(disciplina_auxiliar);
 		
+	}
+	public Disciplina findLikeName(String nome) {
+		return disciplinaDAO.findLikeName(nome);
 	}
 
 }
