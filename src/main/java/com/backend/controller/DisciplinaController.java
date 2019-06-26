@@ -29,8 +29,8 @@ public class DisciplinaController {
 	}
 	@PostMapping(value = "/")
 	@ResponseBody
-	public ResponseEntity<Usuario> save(@RequestBody Iterable<Disciplina> disciplinas) {
+	public ResponseEntity<Iterable<Disciplina>> save(@RequestBody Iterable<Disciplina> disciplinas) {
 		Iterable<Disciplina> disciplinas2 = this.disciplinaService.save(disciplinas);
-		return new ResponseEntity<Iterable<Disciplina>>(disciplinas, HttpStatus.CREATED);
+		return new ResponseEntity<Iterable<Disciplina>>(disciplinas2, HttpStatus.CREATED);
 	}
 }

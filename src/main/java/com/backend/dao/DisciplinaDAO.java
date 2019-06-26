@@ -12,4 +12,7 @@ public interface DisciplinaDAO extends JpaRepository<Usuario, String> {
 	
 	@Query("SELECT d FROM Disciplina d WHERE d.nome like '%discname%'")
 	public Disciplina findLikeName(@Param("discname") String nome);
+	
+	
+	public Iterable<Disciplina> saveAll(Iterable<Disciplina> disciplinas);
 }
