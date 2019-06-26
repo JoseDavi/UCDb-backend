@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +26,7 @@ public class UsuarioController {
 	public UsuarioController (UsuarioService usuarioService) {
 		this.usuarioService = usuarioService;
 	}
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/{email}")
 	@ResponseBody
 	public ResponseEntity<Usuario> findByemail(@PathVariable String email) {
 		Usuario usuario = this.usuarioService.findByemail(email);
@@ -52,7 +53,7 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(newUsuario, HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping(value = "/{email}")
 	public ResponseEntity deleteByemail(@PathVariable String email) {
 		try {
 			this.usuarioService.deleteByemail(email);

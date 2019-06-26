@@ -1,9 +1,14 @@
 package com.backend.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Disciplina {
@@ -12,7 +17,9 @@ public class Disciplina {
 	private long id;
 	
 	private String nome;
-
+	@ManyToMany
+	@JoinTable(name = "Likes", joinColumns = { @JoinColumn (name = "id")}, inverseJoinColumns = {@JoinColumn(name = "email")}  )
+	private List<Usuario> likes;
 	public Disciplina() {
 	}
 
@@ -33,4 +40,13 @@ public class Disciplina {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public void setLikes(List<Usuario> likes) {
+		this.likes = likes;
+	}
+	
+	public List<Usuario> getLikes() {
+		return this.likes;
+	}
+
 }

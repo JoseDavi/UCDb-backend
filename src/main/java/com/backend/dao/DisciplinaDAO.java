@@ -1,18 +1,21 @@
 package com.backend.dao;
 
+import java.io.Serializable;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.backend.model.Disciplina;
-import com.backend.model.Usuario;
 @Repository
-public interface DisciplinaDAO extends JpaRepository<Usuario, String> {
+public interface DisciplinaDAO<T ,ID extends Serializable> extends JpaRepository<Disciplina, Long> {
 	
 	@Query("SELECT d FROM Disciplina d WHERE d.nome like '%discname%'")
 	public Disciplina findLikeName(@Param("discname") String nome);
 	
 	
-	public Iterable<Disciplina> saveAll(Iterable<Disciplina> disciplinas);
+	public Disciplina save(Disciplina disciplina);
+	
+	public Disciplina findById(long id);
 }
