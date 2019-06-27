@@ -53,4 +53,10 @@ public class DisciplinaController {
 		return new ResponseEntity<Disciplina>(disciplina,HttpStatus.OK);
 		
 	}
+	
+	@PostMapping(value = "/admin")
+	@ResponseBody
+	public ResponseEntity<List<Disciplina>> save(@RequestBody List<Disciplina> disciplinas) {
+		return new ResponseEntity<List<Disciplina>>(this.disciplinaService.saveAll(disciplinas), HttpStatus.CREATED);
+	}
 }
