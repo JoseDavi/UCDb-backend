@@ -47,11 +47,15 @@ public class DisciplinaService {
 		
 	}
 	
-	public Disciplina findLikeName(String nome) {
+	public List<Disciplina> findLikeName(String nome) {
 		return disciplinaDAO.findLikeName(nome);
 	}
 	
 	public List<Disciplina> saveAll(List<Disciplina> disciplinas) {
 		return this.disciplinaDAO.saveAll(disciplinas);
+	}
+
+	public List<Disciplina> findAll() {
+		return this.disciplinaDAO.findAll();
 	}
 }

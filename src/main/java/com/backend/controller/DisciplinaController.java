@@ -43,14 +43,21 @@ public class DisciplinaController {
 		Disciplina disciplina2 = this.disciplinaService.findById(id);
 		return new ResponseEntity<Disciplina>(disciplina2, HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/")
+	@ResponseBody
+	public ResponseEntity<List<Disciplina>> findAll(){
+		return new ResponseEntity<List<Disciplina>>(this.disciplinaService.findAll(), HttpStatus.OK);
+	}
+	
 	@GetMapping(value = "/find/{nome}")
 	@ResponseBody
-	public ResponseEntity<Disciplina> findLikeName(@PathVariable String nome){
-		Disciplina disciplina = this.disciplinaService.findLikeName(nome);
-		if (disciplina == null) {
+	public ResponseEntity<List<Disciplina>> findLikeName(@PathVariable String nome){
+		List<Disciplina> disciplinas = this.disciplinaService.findLikeName(nome.toUpperCase());
+		if (disciplinas == null) {
 			throw new usuarioNotFoundException("Usuario não existe!");
 		}
-		return new ResponseEntity<Disciplina>(disciplina,HttpStatus.OK);
+		return new ResponseEntity<List<Disciplina>>(disciplinas,HttpStatus.OK);
 		
 	}
 	
