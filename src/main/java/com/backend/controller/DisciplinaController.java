@@ -14,21 +14,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.exceptions.usuarioNotFoundException;
 import com.backend.model.Disciplina;
+import com.backend.model.PerfilDisciplina;
 import com.backend.service.DisciplinaService;
+import com.backend.service.PerfilDisciplinaService;
 
 
 @RestController
 @RequestMapping({"/v1/disciplinas"})
 public class DisciplinaController {
 	private DisciplinaService disciplinaService;
-	
-	public DisciplinaController (DisciplinaService disciplinaService) {
+	private PerfilDisciplinaService perfilDisciplinaService;
+	public DisciplinaController (DisciplinaService disciplinaService,PerfilDisciplinaService perfilDisciplinaService) {
 		this.disciplinaService = disciplinaService;
+		this.perfilDisciplinaService = perfilDisciplinaService;
 	}
 	@PostMapping(value = "/")
 	@ResponseBody
 	public ResponseEntity<Disciplina> save(@RequestBody Disciplina disciplina) {
 		Disciplina disciplina2 = this.disciplinaService.save(disciplina);
+		this.perfilDisciplinaService.save(new PerfilDisciplina(disciplina));
 		return new ResponseEntity<Disciplina>(disciplina2, HttpStatus.CREATED);
 	}
 	@PostMapping(value = "/curtiu/{id}/{email}")

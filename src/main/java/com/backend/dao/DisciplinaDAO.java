@@ -15,7 +15,7 @@ public interface DisciplinaDAO<T ,ID extends Serializable> extends JpaRepository
 	@Query("SELECT d FROM Disciplina d WHERE d.nome LIKE %:discname%")
 	public List<Disciplina> findLikeName(@Param("discname") String nome);
 	
-	
+	@SuppressWarnings("unchecked")
 	public Disciplina save(Disciplina disciplina);
 	
 	public Disciplina findById(long id);

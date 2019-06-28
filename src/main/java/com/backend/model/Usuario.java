@@ -14,6 +14,7 @@ public class Usuario {
 	private String password;
 	private String primeiroNome;
 	private String ultimoNome;
+	private List<Comentario> comentariosFeitos;
 	@ManyToMany(mappedBy = "likes")
 	private List<Disciplina> disciplinasComLikes;
 	public Usuario() {
@@ -25,6 +26,7 @@ public class Usuario {
 		this.email = email;
 		this.password = password;
 		this.disciplinasComLikes = new ArrayList<Disciplina>();
+		this.comentariosFeitos = new ArrayList<Comentario>();
 	}
 
 	public String getPrimeiroNome() {
@@ -57,5 +59,11 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public List<Comentario> getComentariosFeitos(){
+		return this.comentariosFeitos;
+	}
+	public void setComentariosFeitos(List<Comentario> comentariosFeitos) {
+		this.comentariosFeitos = comentariosFeitos;
 	}
 }
