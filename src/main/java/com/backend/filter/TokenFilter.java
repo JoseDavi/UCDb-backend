@@ -18,24 +18,24 @@ public class TokenFilter extends GenericFilterBean {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		
+
 		HttpServletRequest req = (HttpServletRequest) request;
-		
+
 		String header = req.getHeader("Authorization");
-		
-		if(header == null || !header.startsWith("Bearer ")) {
+
+		if (header == null || !header.startsWith("Bearer ")) {
 			throw new ServletException("Token inexistente ou mal formatado!");
 		}
-		
+
 		// Extraindo apenas o token do cabecalho.
 		String token = header.substring(7);
-		
+
 		try {
 			Jwts.parser().setSigningKey("banana").parseClaimsJws(token).getBody();
-		}catch(SignatureException e) {
+		} catch (SignatureException e) {
 			throw new ServletException("Token invalido ou expirado!");
 		}
-		
+
 		chain.doFilter(request, response);
 	}
 

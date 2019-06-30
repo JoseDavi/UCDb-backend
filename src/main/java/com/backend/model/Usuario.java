@@ -9,6 +9,7 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class Usuario {
+
 	@Id
 	private String email;
 	private String password;
@@ -17,6 +18,7 @@ public class Usuario {
 	private List<Comentario> comentariosFeitos;
 	@ManyToMany(mappedBy = "likes")
 	private List<Disciplina> disciplinasComLikes;
+
 	public Usuario() {
 	}
 
@@ -60,9 +62,11 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public List<Comentario> getComentariosFeitos(){
+
+	public List<Comentario> getComentariosFeitos() {
 		return this.comentariosFeitos;
 	}
+
 	public void setComentariosFeitos(List<Comentario> comentariosFeitos) {
 		this.comentariosFeitos = comentariosFeitos;
 	}

@@ -20,44 +20,40 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @RestController
 @RequestMapping("/v1/auth")
 public class LoginController {
-	
+
 	private final String TOKEN_KEY = "banana";
-	
+
 	@Autowired
 	private UsuarioService userService;
-	
+
 	@PostMapping("/login")
 	public LoginResponse authenticate(@RequestBody Usuario user) throws ServletException {
 
 		// Recupera o usuario
 		Usuario authUser = userService.findByemail(user.getEmail());
-		
+
 		// verificacoes
-		if(authUser == null) {
+		if (authUser == null) {
 			throw new usuarioNotFoundException("Usuario nao encontrado!");
 		}
-		
-		if(!authUser.getPassword().equals(user.getPassword())) {
+
+		if (!authUser.getPassword().equals(user.getPassword())) {
 			throw new usuarioNotFoundException("Senha invalida!");
 		}
-		
-		String token = Jwts.builder().
-				setSubject(authUser.getEmail()).
-				signWith(SignatureAlgorithm.HS512, TOKEN_KEY).
-				setExpiration(new Date(System.currentTimeMillis() + 1 * 60 * 1000))
-				.compact();
-		
+
+		String token = Jwts.builder().setSubject(authUser.getEmail()).signWith(SignatureAlgorithm.HS512, TOKEN_KEY)
+				.setExpiration(new Date(System.currentTimeMillis() + 1 * 60 * 1000)).compact();
+
 		return new LoginResponse(token);
-			
-		
+
 	}
-	
+
 	private class LoginResponse {
 		public String token;
-		
+
 		public LoginResponse(String token) {
 			this.token = token;
 		}
 	}
-	
+
 }

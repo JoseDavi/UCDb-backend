@@ -19,40 +19,43 @@ import com.backend.model.Usuario;
 import com.backend.service.UsuarioService;
 
 @RestController
-@RequestMapping({"/v1/users"})
+@RequestMapping({ "/v1/users" })
 public class UsuarioController {
+
 	private UsuarioService usuarioService;
-	
-	public UsuarioController (UsuarioService usuarioService) {
+
+	public UsuarioController(UsuarioService usuarioService) {
 		this.usuarioService = usuarioService;
 	}
+
 	@GetMapping(value = "/{email}")
 	@ResponseBody
 	public ResponseEntity<Usuario> findByemail(@PathVariable String email) {
 		Usuario usuario = this.usuarioService.findByemail(email);
-		
+
 		if (usuario == null) {
 			throw new usuarioNotFoundException("Usuario não existe!");
 		}
-		
+
 		return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
 	}
+
 	@PostMapping(value = "/")
 	@ResponseBody
 	public ResponseEntity<Usuario> save(@RequestBody Usuario usuario) {
 		Usuario check = this.usuarioService.findByemail(usuario.getEmail());
-		if(check != null) {
+		if (check != null) {
 			throw new usuarioAlreadyExistsException("Usuario já existe!");
 		}
 		Usuario newUsuario = this.usuarioService.save(usuario);
-		
+
 		if (newUsuario == null) {
-			throw  new InternalError("Something went wrong");
+			throw new InternalError("Something went wrong");
 		}
-		
+
 		return new ResponseEntity<Usuario>(newUsuario, HttpStatus.CREATED);
 	}
-	
+
 	@DeleteMapping(value = "/{email}")
 	public ResponseEntity deleteByemail(@PathVariable String email) {
 		try {
@@ -62,5 +65,5 @@ public class UsuarioController {
 			throw new InternalError("Something went wrong");
 		}
 	}
-	
+
 }

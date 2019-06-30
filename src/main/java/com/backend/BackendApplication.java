@@ -10,7 +10,6 @@ import org.springframework.web.filter.CorsFilter;
 
 import com.backend.filter.TokenFilter;
 
-
 @SpringBootApplication
 public class BackendApplication {
 
@@ -24,17 +23,16 @@ public class BackendApplication {
 		bean.setOrder(0);
 		return bean;
 	}
+
 	@Bean
 	public FilterRegistrationBean filterJwt() {
 		FilterRegistrationBean filterRb = new FilterRegistrationBean();
 		filterRb.setFilter(new TokenFilter());
 		filterRb.addUrlPatterns("/private");
 		return filterRb;
-		
-		
+
 	}
-	
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
 	}

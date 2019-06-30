@@ -18,16 +18,18 @@ import com.backend.model.PerfilDisciplina;
 import com.backend.service.DisciplinaService;
 import com.backend.service.PerfilDisciplinaService;
 
-
 @RestController
-@RequestMapping({"/v1/disciplinas"})
+@RequestMapping({ "/v1/disciplinas" })
 public class DisciplinaController {
+	
 	private DisciplinaService disciplinaService;
 	private PerfilDisciplinaService perfilDisciplinaService;
-	public DisciplinaController (DisciplinaService disciplinaService,PerfilDisciplinaService perfilDisciplinaService) {
+
+	public DisciplinaController(DisciplinaService disciplinaService, PerfilDisciplinaService perfilDisciplinaService) {
 		this.disciplinaService = disciplinaService;
 		this.perfilDisciplinaService = perfilDisciplinaService;
 	}
+
 	@PostMapping(value = "/")
 	@ResponseBody
 	public ResponseEntity<Disciplina> save(@RequestBody Disciplina disciplina) {
@@ -35,36 +37,38 @@ public class DisciplinaController {
 		this.perfilDisciplinaService.save(new PerfilDisciplina(disciplina));
 		return new ResponseEntity<Disciplina>(disciplina2, HttpStatus.CREATED);
 	}
+
 	@PostMapping(value = "/curtiu/{id}/{email}")
 	@ResponseBody
-	public ResponseEntity<Disciplina> curtiu(@PathVariable long id,@PathVariable String email){
+	public ResponseEntity<Disciplina> curtiu(@PathVariable long id, @PathVariable String email) {
 		Disciplina disciplina2 = this.disciplinaService.curtiu(id, email);
 		return new ResponseEntity<Disciplina>(disciplina2, HttpStatus.OK);
 	}
+
 	@GetMapping(value = "{id}")
 	@ResponseBody
-	public ResponseEntity<Disciplina> findById(@PathVariable long id){
+	public ResponseEntity<Disciplina> findById(@PathVariable long id) {
 		Disciplina disciplina2 = this.disciplinaService.findById(id);
 		return new ResponseEntity<Disciplina>(disciplina2, HttpStatus.OK);
 	}
-	
+
 	@GetMapping(value = "/")
 	@ResponseBody
-	public ResponseEntity<List<Disciplina>> findAll(){
+	public ResponseEntity<List<Disciplina>> findAll() {
 		return new ResponseEntity<List<Disciplina>>(this.disciplinaService.findAll(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping(value = "/find/{nome}")
 	@ResponseBody
-	public ResponseEntity<List<Disciplina>> findLikeName(@PathVariable String nome){
+	public ResponseEntity<List<Disciplina>> findLikeName(@PathVariable String nome) {
 		List<Disciplina> disciplinas = this.disciplinaService.findLikeName(nome.toUpperCase());
 		if (disciplinas == null) {
 			throw new usuarioNotFoundException("Usuario não existe!");
 		}
-		return new ResponseEntity<List<Disciplina>>(disciplinas,HttpStatus.OK);
-		
+		return new ResponseEntity<List<Disciplina>>(disciplinas, HttpStatus.OK);
+
 	}
-	
+
 	@PostMapping(value = "/admin")
 	@ResponseBody
 	public ResponseEntity<List<Disciplina>> save(@RequestBody List<Disciplina> disciplinas) {
