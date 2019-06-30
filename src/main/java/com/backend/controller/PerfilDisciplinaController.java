@@ -1,5 +1,6 @@
 package com.backend.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,8 @@ import com.backend.service.PerfilDisciplinaService;
 @RestController
 @RequestMapping({ "/v1/perfilDisciplinas" })
 public class PerfilDisciplinaController {
-
+	
+	@Autowired
 	private PerfilDisciplinaService perfildisciplinaService;
 	
 	@GetMapping(value = "{id}")

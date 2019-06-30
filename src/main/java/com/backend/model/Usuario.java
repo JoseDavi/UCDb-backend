@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Usuario {
 
@@ -17,8 +19,10 @@ public class Usuario {
 	private String primeiroNome;
 	private String ultimoNome;
 	@OneToMany
+	@JsonBackReference
 	private List<Comentario> comentariosFeitos;
 	@ManyToMany(mappedBy = "likes")
+	@JsonBackReference
 	private List<PerfilDisciplina> disciplinasComLikes;
 
 	public Usuario() {
