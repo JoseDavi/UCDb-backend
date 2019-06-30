@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario {
@@ -15,6 +16,7 @@ public class Usuario {
 	private String password;
 	private String primeiroNome;
 	private String ultimoNome;
+	@OneToMany
 	private List<Comentario> comentariosFeitos;
 	@ManyToMany(mappedBy = "likes")
 	private List<Disciplina> disciplinasComLikes;

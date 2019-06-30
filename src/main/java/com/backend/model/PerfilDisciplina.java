@@ -4,13 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class PerfilDisciplina {
-
+	
 	@Id
+	private long id;
+	
+	@OneToOne
 	private Disciplina disciplina;
+	
+	@OneToMany
 	private List<Comentario> comentarios;
 
 	public PerfilDisciplina() {
@@ -19,6 +28,7 @@ public class PerfilDisciplina {
 
 	public PerfilDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
+		this.id = disciplina.getId();
 		this.comentarios = new ArrayList<Comentario>();
 	}
 

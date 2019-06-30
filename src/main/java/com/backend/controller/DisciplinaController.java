@@ -1,5 +1,6 @@
 package com.backend.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -72,6 +73,10 @@ public class DisciplinaController {
 	@PostMapping(value = "/admin")
 	@ResponseBody
 	public ResponseEntity<List<Disciplina>> save(@RequestBody List<Disciplina> disciplinas) {
-		return new ResponseEntity<List<Disciplina>>(this.disciplinaService.saveAll(disciplinas), HttpStatus.CREATED);
+		List<Disciplina> disciplinascadastradas = this.disciplinaService.saveAll(disciplinas);
+		for (Disciplina disciplina : disciplinascadastradas) {
+			perfilDisciplinaService.save(new PerfilDisciplina(disciplina));
+		}
+		return new ResponseEntity<List<Disciplina>>(disciplinascadastradas, HttpStatus.CREATED);
 	}
 }
