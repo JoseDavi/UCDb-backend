@@ -3,14 +3,22 @@ package com.backend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.backend.dao.DisciplinaDAO;
 import com.backend.dao.PerfilDisciplinaDAO;
+import com.backend.dao.UsuarioDAO;
+import com.backend.model.Disciplina;
 import com.backend.model.PerfilDisciplina;
+import com.backend.model.Usuario;
 
 @Service
 public class PerfilDisciplinaService {
 	
 	@Autowired
 	private PerfilDisciplinaDAO perfilDisciplinaDAO;
+	@Autowired
+	private DisciplinaDAO disciplinaDAO;
+	@Autowired
+	private UsuarioDAO usuarioDAO;
 
 	public PerfilDisciplina save(PerfilDisciplina perfil) {
 		return perfilDisciplinaDAO.save(perfil);
@@ -18,5 +26,34 @@ public class PerfilDisciplinaService {
 
 	public PerfilDisciplina findById(long id) {
 		return perfilDisciplinaDAO.findById(id);
+	}
+	
+	public PerfilDisciplina curtiu(long id, String email) {
+		System.out.println(id);
+		System.out.println(email);
+		Disciplina disciplina_auxiliar = disciplinaDAO.findById(id);
+		System.out.println(disciplina_auxiliar);
+		Usuario usuario_auxiliar = usuarioDAO.findByemail(email);
+		System.out.println(usuario_auxiliar);
+		PerfilDisciplina perfilDisciplina_auxiliar = perfilDisciplinaDAO.findById(id);
+		
+
+
+		System.out.println(perfilDisciplina_auxiliar);
+		
+		if (disciplina_auxiliar == null) {
+			throw new RuntimeException("Disciplina não existe");
+		}
+
+		if (usuario_auxiliar == null) {
+			throw new RuntimeException("Usuario não existe");
+		}
+
+		if (perfilDisciplina_auxiliar.getLikes().contains(usuario_auxiliar)) {
+			perfilDisciplina_auxiliar.getLikes().remove(usuario_auxiliar);
+		} else {
+			perfilDisciplina_auxiliar.getLikes().add(usuario_auxiliar);
+		}
+		return perfilDisciplinaDAO.save(perfilDisciplina_auxiliar);
 	}
 }

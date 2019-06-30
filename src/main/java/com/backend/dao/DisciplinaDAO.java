@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.backend.model.Disciplina;
+
 @Repository
 public interface DisciplinaDAO<T ,ID extends Serializable> extends JpaRepository<Disciplina, Long> {
 	

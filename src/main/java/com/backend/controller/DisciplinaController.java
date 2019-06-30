@@ -1,6 +1,5 @@
 package com.backend.controller;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -22,7 +21,7 @@ import com.backend.service.PerfilDisciplinaService;
 @RestController
 @RequestMapping({ "/v1/disciplinas" })
 public class DisciplinaController {
-	
+
 	private DisciplinaService disciplinaService;
 	private PerfilDisciplinaService perfilDisciplinaService;
 
@@ -39,18 +38,10 @@ public class DisciplinaController {
 		return new ResponseEntity<Disciplina>(disciplina2, HttpStatus.CREATED);
 	}
 
-	@PostMapping(value = "/curtiu/{id}/{email}")
-	@ResponseBody
-	public ResponseEntity<Disciplina> curtiu(@PathVariable long id, @PathVariable String email) {
-		Disciplina disciplina2 = this.disciplinaService.curtiu(id, email);
-		return new ResponseEntity<Disciplina>(disciplina2, HttpStatus.OK);
-	}
-
 	@GetMapping(value = "{id}")
 	@ResponseBody
 	public ResponseEntity<Disciplina> findById(@PathVariable long id) {
-		Disciplina disciplina2 = this.disciplinaService.findById(id);
-		return new ResponseEntity<Disciplina>(disciplina2, HttpStatus.OK);
+		return new ResponseEntity<Disciplina>(this.disciplinaService.findById(id), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/")

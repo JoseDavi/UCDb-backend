@@ -1,5 +1,6 @@
 package com.backend.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.backend.dao.UsuarioDAO;
@@ -7,7 +8,8 @@ import com.backend.model.Usuario;
 
 @Service
 public class UsuarioService {
-
+	
+	@Autowired
 	private UsuarioDAO usuarioDAO;
 
 	public UsuarioService(UsuarioDAO usuarioDAO) {
@@ -22,8 +24,8 @@ public class UsuarioService {
 		return usuarioDAO.findByemail(email);
 	}
 
-	public void deleteByemail(String email) {
-		usuarioDAO.deleteByemail(email);
+	public void deleteByEmail(String email) {
+		usuarioDAO.deleteByEmail(email);
 	}
 
 }

@@ -13,18 +13,17 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-
 @Entity
 public class Comentario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@ManyToOne
 	@JsonBackReference
 	private PerfilDisciplina perfilDisciplina;
-	
+
 	private String comentario;
 	@ManyToOne
 	private Usuario usuario;
@@ -73,5 +72,21 @@ public class Comentario {
 
 	public void setRespostas(List<Comentario> respostas) {
 		this.respostas = respostas;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public PerfilDisciplina getPerfilDisciplina() {
+		return perfilDisciplina;
+	}
+
+	public void setPerfilDisciplina(PerfilDisciplina perfilDisciplina) {
+		this.perfilDisciplina = perfilDisciplina;
 	}
 }

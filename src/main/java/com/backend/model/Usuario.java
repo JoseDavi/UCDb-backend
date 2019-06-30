@@ -19,7 +19,7 @@ public class Usuario {
 	@OneToMany
 	private List<Comentario> comentariosFeitos;
 	@ManyToMany(mappedBy = "likes")
-	private List<Disciplina> disciplinasComLikes;
+	private List<PerfilDisciplina> disciplinasComLikes;
 
 	public Usuario() {
 	}
@@ -29,7 +29,7 @@ public class Usuario {
 		this.ultimoNome = ultimoNome;
 		this.email = email;
 		this.password = password;
-		this.disciplinasComLikes = new ArrayList<Disciplina>();
+		this.disciplinasComLikes = new ArrayList<PerfilDisciplina>();
 		this.comentariosFeitos = new ArrayList<Comentario>();
 	}
 
@@ -71,5 +71,13 @@ public class Usuario {
 
 	public void setComentariosFeitos(List<Comentario> comentariosFeitos) {
 		this.comentariosFeitos = comentariosFeitos;
+	}
+
+	public List<PerfilDisciplina> getDisciplinasComLikes() {
+		return disciplinasComLikes;
+	}
+
+	public void setDisciplinasComLikes(List<PerfilDisciplina> disciplinasComLikes) {
+		this.disciplinasComLikes = disciplinasComLikes;
 	}
 }

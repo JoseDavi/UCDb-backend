@@ -9,11 +9,11 @@ import com.backend.model.Usuario;
 
 @Repository
 public interface UsuarioDAO extends JpaRepository<Usuario, String> {
-	
+
 	@Query("SELECT u FROM Usuario u WHERE u.email = :pemail")
 	public Usuario findByemail(@Param("pemail") String email);
-	
+
 	public Usuario save(Usuario usuario);
-	
-	public void deleteByemail(String email);
+
+	public void deleteByEmail(String email);
 }
