@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.backend.model.Usuario;
+
 @Repository
 public interface UsuarioDAO extends JpaRepository<Usuario, String> {
 	

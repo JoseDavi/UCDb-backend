@@ -1,9 +1,12 @@
 package com.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.backend.dao.PerfilDisciplinaDAO;
 import com.backend.model.PerfilDisciplina;
 
+@Service
 public class PerfilDisciplinaService {
 	
 	@Autowired
