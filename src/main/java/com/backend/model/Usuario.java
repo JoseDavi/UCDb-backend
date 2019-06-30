@@ -19,7 +19,6 @@ public class Usuario {
 	private String primeiroNome;
 	private String ultimoNome;
 	@OneToMany
-	@JsonBackReference
 	private List<Comentario> comentariosFeitos;
 	@ManyToMany(mappedBy = "likes")
 	@JsonBackReference
