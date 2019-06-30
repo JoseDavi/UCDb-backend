@@ -12,7 +12,7 @@ import com.backend.model.Usuario;
 
 @Service
 public class PerfilDisciplinaService {
-	
+
 	@Autowired
 	private PerfilDisciplinaDAO perfilDisciplinaDAO;
 	@Autowired
@@ -27,20 +27,12 @@ public class PerfilDisciplinaService {
 	public PerfilDisciplina findById(long id) {
 		return perfilDisciplinaDAO.findById(id);
 	}
-	
+
 	public PerfilDisciplina curtiu(long id, String email) {
-		System.out.println(id);
-		System.out.println(email);
 		Disciplina disciplina_auxiliar = disciplinaDAO.findById(id);
-		System.out.println(disciplina_auxiliar);
 		Usuario usuario_auxiliar = usuarioDAO.findByemail(email);
-		System.out.println(usuario_auxiliar);
 		PerfilDisciplina perfilDisciplina_auxiliar = perfilDisciplinaDAO.findById(id);
-		
 
-
-		System.out.println(perfilDisciplina_auxiliar);
-		
 		if (disciplina_auxiliar == null) {
 			throw new RuntimeException("Disciplina não existe");
 		}

@@ -30,7 +30,6 @@ public class PerfilDisciplinaController {
 	@PostMapping(value = "/curtiu/{id}/{email}")
 	@ResponseBody
 	public ResponseEntity<PerfilDisciplina> curtiu(@PathVariable long id, @PathVariable String email) {
-		System.out.println("aqui porra");
 		return new ResponseEntity<PerfilDisciplina>(this.perfildisciplinaService.curtiu(id, email), HttpStatus.OK);
 	}
 }

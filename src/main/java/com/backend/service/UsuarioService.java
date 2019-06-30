@@ -8,7 +8,7 @@ import com.backend.model.Usuario;
 
 @Service
 public class UsuarioService {
-	
+
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 
@@ -22,10 +22,6 @@ public class UsuarioService {
 
 	public Usuario findByemail(String email) {
 		return usuarioDAO.findByemail(email);
-	}
-
-	public void deleteByEmail(String email) {
-		usuarioDAO.deleteByEmail(email);
 	}
 
 }

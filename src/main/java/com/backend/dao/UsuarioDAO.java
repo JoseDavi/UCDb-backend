@@ -15,5 +15,4 @@ public interface UsuarioDAO extends JpaRepository<Usuario, String> {
 
 	public Usuario save(Usuario usuario);
 
-	public void deleteByEmail(String email);
 }

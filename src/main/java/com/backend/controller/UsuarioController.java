@@ -56,15 +56,4 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(newUsuario, HttpStatus.CREATED);
 	}
 
-	@DeleteMapping(value = "/{email}")
-	@ResponseBody
-	public ResponseEntity deleteByemail(@PathVariable String email) {
-		try {
-			this.usuarioService.deleteByEmail(email);
-			return new ResponseEntity(HttpStatus.OK);
-		} catch (Exception e) {
-			throw new InternalError("Something went wrong");
-		}
-	}
-
 }
