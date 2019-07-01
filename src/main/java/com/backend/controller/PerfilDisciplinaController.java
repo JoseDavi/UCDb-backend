@@ -1,5 +1,7 @@
 package com.backend.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,5 +55,14 @@ public class PerfilDisciplinaController {
 	public ResponseEntity<PerfilDisciplina> comentouById(@PathVariable long idDisc,@PathVariable String email,@PathVariable long idComentario, @RequestBody String comentario){
 		return new ResponseEntity<PerfilDisciplina>(this.perfildisciplinaService.comentouById(idDisc,idComentario,comentario,email),HttpStatus.OK);
 	}
-
+	@GetMapping(value = "/getByLikes")
+	@ResponseBody
+	public ResponseEntity<List<PerfilDisciplina>> findAllByNumeroLikes() {
+		return new ResponseEntity<List<PerfilDisciplina>>(this.perfildisciplinaService.findAllByNumeroLikes(), HttpStatus.OK);
+	}
+	@GetMapping(value = "/getByComentarios")
+	@ResponseBody
+	public ResponseEntity<List<PerfilDisciplina>> findAllByNumeroComentarios() {
+		return new ResponseEntity<List<PerfilDisciplina>>(this.perfildisciplinaService.findAllByNumeroComentarios(), HttpStatus.OK);
+	}
 }

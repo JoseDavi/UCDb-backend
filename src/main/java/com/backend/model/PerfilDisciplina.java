@@ -27,9 +27,26 @@ public class PerfilDisciplina {
 	@JoinTable(name = "Likes", joinColumns = { @JoinColumn(name = "id") }, inverseJoinColumns = {
 			@JoinColumn(name = "email") })
 	private List<Usuario> likes;
-
+	private int numeroComentarios;
+	private int numeroLikes;
 	public PerfilDisciplina() {
 
+	}
+
+	public int getNumeroComentarios() {
+		return numeroComentarios;
+	}
+
+	public void setNumeroComentarios(int numeroComentarios) {
+		this.numeroComentarios = numeroComentarios;
+	}
+
+	public int getNumeroLikes() {
+		return numeroLikes;
+	}
+
+	public void setNumeroLikes(int numeroLikes) {
+		this.numeroLikes = numeroLikes;
 	}
 
 	public PerfilDisciplina(Disciplina disciplina) {

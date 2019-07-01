@@ -1,6 +1,9 @@
 package com.backend.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -48,8 +51,12 @@ public class PerfilDisciplinaService {
 
 		if (perfilDisciplina_auxiliar.getLikes().contains(usuario_auxiliar)) {
 			perfilDisciplina_auxiliar.getLikes().remove(usuario_auxiliar);
+			perfilDisciplina_auxiliar.setNumeroLikes(perfilDisciplina_auxiliar.getNumeroLikes()-1);
+
 		} else {
 			perfilDisciplina_auxiliar.getLikes().add(usuario_auxiliar);
+			perfilDisciplina_auxiliar.setNumeroLikes(perfilDisciplina_auxiliar.getNumeroLikes()+1);
+
 		}
 		return perfilDisciplinaDAO.save(perfilDisciplina_auxiliar);
 	}
@@ -70,7 +77,7 @@ public class PerfilDisciplinaService {
 		Comentario newComentario = comentarioDAO.save(comentarioAlx);
 		comentarioAlx.setPerfilDisciplina(perfilDisciplina_auxiliar);
 		perfilDisciplina_auxiliar.getComentarios().add(newComentario);
-
+		perfilDisciplina_auxiliar.setNumeroComentarios(perfilDisciplina_auxiliar.getNumeroComentarios()+1);
 		
 		return perfilDisciplinaDAO.save(perfilDisciplina_auxiliar);
 	}
@@ -79,6 +86,8 @@ public class PerfilDisciplinaService {
 		Comentario comentario = comentarioDAO.findById(id);
 		PerfilDisciplina perfilDisciplina_auxiliar = comentario.getPerfilDisciplina();
 		comentario.setFoiDeletado(true);
+		perfilDisciplina_auxiliar.setNumeroComentarios(perfilDisciplina_auxiliar.getNumeroComentarios()-1);
+
 		return perfilDisciplinaDAO.save(perfilDisciplina_auxiliar);
 	}
 
@@ -99,6 +108,13 @@ public class PerfilDisciplinaService {
 		Comentario newComentario = comentarioDAO.save(comentarioAlx);
 		comentarioAlx.setPerfilDisciplina(perfilDisciplina_auxiliar);
 		perfilDisciplina_auxiliar.getComentarios().add(newComentario);
+		perfilDisciplina_auxiliar.setNumeroComentarios(perfilDisciplina_auxiliar.getNumeroComentarios()+1);
 		return perfilDisciplinaDAO.save(perfilDisciplina_auxiliar);
+	}
+	public List<PerfilDisciplina> findAllByNumeroLikes(){
+		return perfilDisciplinaDAO.findAllByNumeroLikes();
+	}
+	public List<PerfilDisciplina> findAllByNumeroComentarios(){
+		return perfilDisciplinaDAO.findAllByNumeroComentarios();
 	}
 }
