@@ -44,9 +44,14 @@ public class PerfilDisciplinaController {
 	
 	@DeleteMapping(value = "/deleteComentario/{id}")
 	@ResponseBody
-	public ResponseEntity<PerfilDisciplina> deleteByIdComentario(@PathVariable long id) {
+	public ResponseEntity<PerfilDisciplina> deleteByIdComentario(@PathVariable long id,@RequestBody String comentario) {
 		return new ResponseEntity<PerfilDisciplina>(this.perfildisciplinaService.deleteByIdComentario(id),
 				HttpStatus.OK);
+	}
+	@PostMapping(value = "/comentouById/{idDisc}/{email}/{idComentario}")
+	@ResponseBody
+	public ResponseEntity<PerfilDisciplina> comentouById(@PathVariable long idDisc,@PathVariable String email,@PathVariable long idComentario, @RequestBody String comentario){
+		return new ResponseEntity<PerfilDisciplina>(this.perfildisciplinaService.comentouById(idDisc,idComentario,comentario,email),HttpStatus.OK);
 	}
 
 }

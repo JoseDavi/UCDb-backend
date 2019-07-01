@@ -1,6 +1,7 @@
 package com.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.backend.dao.ComentarioDAO;
@@ -65,8 +66,9 @@ public class PerfilDisciplinaService {
 		if (usuario_auxiliar == null) {
 			throw new RuntimeException("Usuario não existe");
 		}
-		Comentario comentarioAlx = new Comentario(perfilDisciplina_auxiliar, comentario, usuario_auxiliar);
+		Comentario comentarioAlx = new Comentario(perfilDisciplina_auxiliar, comentario, usuario_auxiliar,null);
 		Comentario newComentario = comentarioDAO.save(comentarioAlx);
+		comentarioAlx.setPerfilDisciplina(perfilDisciplina_auxiliar);
 		perfilDisciplina_auxiliar.getComentarios().add(newComentario);
 
 		
@@ -76,10 +78,27 @@ public class PerfilDisciplinaService {
 	public PerfilDisciplina deleteByIdComentario(long id) {
 		Comentario comentario = comentarioDAO.findById(id);
 		PerfilDisciplina perfilDisciplina_auxiliar = comentario.getPerfilDisciplina();
-		perfilDisciplina_auxiliar.getComentarios().remove(comentario);
-		comentarioDAO.deleteById(id);
+		comentario.setFoiDeletado(true);
+		return perfilDisciplinaDAO.save(perfilDisciplina_auxiliar);
+	}
+
+	public PerfilDisciplina comentouById(long idDisc, long idComentario, String comentario, String email) {
+		Disciplina disciplina_auxiliar = disciplinaDAO.findById(idDisc);
+		Usuario usuario_auxiliar = usuarioDAO.findByemail(email);
+		PerfilDisciplina perfilDisciplina_auxiliar = perfilDisciplinaDAO.findById(idDisc);
+		Comentario comentarioAux = comentarioDAO.findById(idComentario);
 		
-		
+		if (disciplina_auxiliar == null) {
+			throw new RuntimeException("Disciplina não existe");
+		}
+
+		if (usuario_auxiliar == null) {
+			throw new RuntimeException("Usuario não existe");
+		}
+		Comentario comentarioAlx = new Comentario(perfilDisciplina_auxiliar, comentario, usuario_auxiliar,comentarioAux);
+		Comentario newComentario = comentarioDAO.save(comentarioAlx);
+		comentarioAlx.setPerfilDisciplina(perfilDisciplina_auxiliar);
+		perfilDisciplina_auxiliar.getComentarios().add(newComentario);
 		return perfilDisciplinaDAO.save(perfilDisciplina_auxiliar);
 	}
 }

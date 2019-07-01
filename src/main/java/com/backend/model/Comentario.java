@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -25,25 +26,38 @@ public class Comentario {
 	private PerfilDisciplina perfilDisciplina;
 
 	private String comentario;
+	
 	@ManyToOne
 	private Usuario usuario;
+	
 	private Date data_hr;
-	@OneToMany
-	private List<Comentario> respostas;
+	
+	@OneToOne
+	private Comentario pai;
+
+	private boolean foiDeletado = false;
 
 	public Comentario() {
 
 	}
 
-	public Comentario(PerfilDisciplina perfilDisciplina, String comentario, Usuario usuario) {
+	public Comentario(PerfilDisciplina perfilDisciplina, String comentario, Usuario usuario,Comentario pai) {
 		this.comentario = comentario;
 		this.usuario = usuario;
 		this.data_hr = new Date();
-		this.respostas = new ArrayList<Comentario>();
+		this.pai = pai;
 	}
 
 	public Date getData_hr() {
 		return data_hr;
+	}
+
+	public boolean isFoiDeletado() {
+		return foiDeletado;
+	}
+
+	public void setFoiDeletado(boolean foiDeletado) {
+		this.foiDeletado = foiDeletado;
 	}
 
 	public void setData_hr(Date data_hr) {
@@ -66,12 +80,14 @@ public class Comentario {
 		this.usuario = usuario;
 	}
 
-	public List<Comentario> getRespostas() {
-		return this.respostas;
+
+
+	public Comentario getPai() {
+		return pai;
 	}
 
-	public void setRespostas(List<Comentario> respostas) {
-		this.respostas = respostas;
+	public void setPai(Comentario pai) {
+		this.pai = pai;
 	}
 
 	public long getId() {
