@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.backend.dao.DisciplinaDAO;
 import com.backend.dao.PerfilDisciplinaDAO;
 import com.backend.dao.UsuarioDAO;
+import com.backend.model.Comentario;
 import com.backend.model.Disciplina;
 import com.backend.model.PerfilDisciplina;
 import com.backend.model.Usuario;
@@ -46,6 +47,23 @@ public class PerfilDisciplinaService {
 		} else {
 			perfilDisciplina_auxiliar.getLikes().add(usuario_auxiliar);
 		}
+		return perfilDisciplinaDAO.save(perfilDisciplina_auxiliar);
+	}
+
+	public PerfilDisciplina comentou(long id, String email, String comentario) {
+		Disciplina disciplina_auxiliar = disciplinaDAO.findById(id);
+		Usuario usuario_auxiliar = usuarioDAO.findByemail(email);
+		PerfilDisciplina perfilDisciplina_auxiliar = perfilDisciplinaDAO.findById(id);
+		
+		if (disciplina_auxiliar == null) {
+			throw new RuntimeException("Disciplina não existe");
+		}
+
+		if (usuario_auxiliar == null) {
+			throw new RuntimeException("Usuario não existe");
+		}
+		perfilDisciplina_auxiliar.getComentarios().add(new Comentario(comentario,usuario_auxiliar));
+		
 		return perfilDisciplinaDAO.save(perfilDisciplina_auxiliar);
 	}
 }

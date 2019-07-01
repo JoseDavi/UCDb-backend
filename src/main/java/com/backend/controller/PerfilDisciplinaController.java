@@ -32,4 +32,10 @@ public class PerfilDisciplinaController {
 	public ResponseEntity<PerfilDisciplina> curtiu(@PathVariable long id, @PathVariable String email) {
 		return new ResponseEntity<PerfilDisciplina>(this.perfildisciplinaService.curtiu(id, email), HttpStatus.OK);
 	}
+	@PostMapping(value = "/comentou/{id}/{email}/{comentario}")
+	@ResponseBody
+	public ResponseEntity<PerfilDisciplina> comentou(@PathVariable long id, @PathVariable String email,@PathVariable String comentario){
+		return new ResponseEntity<PerfilDisciplina>(this.perfildisciplinaService.comentou(id,email,comentario), HttpStatus.OK);
+	}
+	
 }
