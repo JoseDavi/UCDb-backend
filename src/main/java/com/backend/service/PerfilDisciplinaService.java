@@ -3,6 +3,7 @@ package com.backend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.backend.dao.ComentarioDAO;
 import com.backend.dao.DisciplinaDAO;
 import com.backend.dao.PerfilDisciplinaDAO;
 import com.backend.dao.UsuarioDAO;
@@ -20,6 +21,8 @@ public class PerfilDisciplinaService {
 	private DisciplinaDAO disciplinaDAO;
 	@Autowired
 	private UsuarioDAO usuarioDAO;
+	@Autowired
+	private ComentarioDAO comentarioDAO;
 
 	public PerfilDisciplina save(PerfilDisciplina perfil) {
 		return perfilDisciplinaDAO.save(perfil);
@@ -62,7 +65,20 @@ public class PerfilDisciplinaService {
 		if (usuario_auxiliar == null) {
 			throw new RuntimeException("Usuario não existe");
 		}
-		perfilDisciplina_auxiliar.getComentarios().add(new Comentario(comentario,usuario_auxiliar));
+		Comentario comentarioAlx = new Comentario(perfilDisciplina_auxiliar, comentario, usuario_auxiliar);
+		Comentario newComentario = comentarioDAO.save(comentarioAlx);
+		perfilDisciplina_auxiliar.getComentarios().add(newComentario);
+
+		
+		return perfilDisciplinaDAO.save(perfilDisciplina_auxiliar);
+	}
+
+	public PerfilDisciplina deleteByIdComentario(long id) {
+		Comentario comentario = comentarioDAO.findById(id);
+		PerfilDisciplina perfilDisciplina_auxiliar = comentario.getPerfilDisciplina();
+		perfilDisciplina_auxiliar.getComentarios().remove(comentario);
+		comentarioDAO.deleteById(id);
+		
 		
 		return perfilDisciplinaDAO.save(perfilDisciplina_auxiliar);
 	}

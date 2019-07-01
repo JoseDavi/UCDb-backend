@@ -35,7 +35,7 @@ public class Comentario {
 
 	}
 
-	public Comentario(String comentario, Usuario usuario) {
+	public Comentario(PerfilDisciplina perfilDisciplina, String comentario, Usuario usuario) {
 		this.comentario = comentario;
 		this.usuario = usuario;
 		this.data_hr = new Date();

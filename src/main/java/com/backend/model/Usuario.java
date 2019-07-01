@@ -18,8 +18,6 @@ public class Usuario {
 	private String password;
 	private String primeiroNome;
 	private String ultimoNome;
-	@OneToMany
-	private List<Comentario> comentariosFeitos;
 	@ManyToMany(mappedBy = "likes")
 	@JsonBackReference
 	private List<PerfilDisciplina> disciplinasComLikes;
@@ -33,7 +31,6 @@ public class Usuario {
 		this.email = email;
 		this.password = password;
 		this.disciplinasComLikes = new ArrayList<PerfilDisciplina>();
-		this.comentariosFeitos = new ArrayList<Comentario>();
 	}
 
 	public String getPrimeiroNome() {
@@ -66,14 +63,6 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public List<Comentario> getComentariosFeitos() {
-		return this.comentariosFeitos;
-	}
-
-	public void setComentariosFeitos(List<Comentario> comentariosFeitos) {
-		this.comentariosFeitos = comentariosFeitos;
 	}
 
 	public List<PerfilDisciplina> getDisciplinasComLikes() {
