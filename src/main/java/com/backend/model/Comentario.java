@@ -1,5 +1,6 @@
 package com.backend.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,7 @@ public class Comentario {
 	@ManyToOne
 	private Usuario usuario;
 	
-	private Date data_hr;
+	private String data_hr;
 	
 	@OneToOne
 	private Comentario pai;
@@ -44,11 +45,16 @@ public class Comentario {
 	public Comentario(PerfilDisciplina perfilDisciplina, String comentario, Usuario usuario,Comentario pai) {
 		this.comentario = comentario;
 		this.usuario = usuario;
-		this.data_hr = new Date();
+		this.data_hr = data();
 		this.pai = pai;
 	}
+	private String data() {
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss");
+		String data = format.format(new Date());
+		return data;
+	}
 
-	public Date getData_hr() {
+	public String getData_hr() {
 		return data_hr;
 	}
 
@@ -60,7 +66,7 @@ public class Comentario {
 		this.foiDeletado = foiDeletado;
 	}
 
-	public void setData_hr(Date data_hr) {
+	public void setData_hr(String data_hr) {
 		this.data_hr = data_hr;
 	}
 
@@ -79,8 +85,6 @@ public class Comentario {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
-
 
 	public Comentario getPai() {
 		return pai;
