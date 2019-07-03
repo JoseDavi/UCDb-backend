@@ -1,5 +1,6 @@
 package com.backend.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +24,9 @@ import com.backend.service.UsuarioService;
 public class UsuarioController {
 
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private EmailController emailController;
 
 	public UsuarioController(UsuarioService usuarioService) {
 		this.usuarioService = usuarioService;
@@ -52,6 +56,7 @@ public class UsuarioController {
 		if (newUsuario == null) {
 			throw new InternalError("Something went wrong");
 		}
+		this.emailController.sendMail(usuario.getEmail());
 
 		return new ResponseEntity<Usuario>(newUsuario, HttpStatus.CREATED);
 	}
