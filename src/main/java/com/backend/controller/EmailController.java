@@ -16,6 +16,7 @@ public class EmailController {
     @RequestMapping(path = "/email-send", method = RequestMethod.GET)
     public String sendMail(String email) {
         SimpleMailMessage message = new SimpleMailMessage();
+        message.setSubject("Cadastro ucdbufcgpsoft");
         message.setText("Bem Vindo ao ucdbufcgpsoft");
         message.setTo(email);
         message.setFrom("jose.davi.souza@ccc.ufcg.edu.br");
