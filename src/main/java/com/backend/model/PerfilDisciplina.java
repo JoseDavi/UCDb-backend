@@ -11,6 +11,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+/**
+ * classe que sera uma tabela no banco de dados para armazenar os perfis das disciplinas.
+ * 
+ * @author jd-davi
+ *
+ */
 @Entity
 public class PerfilDisciplina {
 

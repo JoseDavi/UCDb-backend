@@ -17,6 +17,12 @@ import com.backend.service.UsuarioService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+/**
+ * Classe que controla as requisicoes referentes ao login dos usuarios.
+ * 
+ * @author jd-davi
+ *
+ */
 @RestController
 @RequestMapping("/v1/auth")
 public class LoginController {
@@ -26,6 +32,13 @@ public class LoginController {
 	@Autowired
 	private UsuarioService userService;
 
+	/**
+	 * Metodo verifica se o email do usuario esta cadastrado e se a senha e correspondente, entao altentica esse usuario.
+	 * 
+	 * @param user: usuario para ser altenticado.
+	 * @return: LoginResponse
+	 * @throws ServletException: exceptions por usuario nao cadastrado ou senha nao correspondente.
+	 */
 	@PostMapping("/login")
 	public LoginResponse authenticate(@RequestBody Usuario user) throws ServletException {
 
@@ -48,6 +61,12 @@ public class LoginController {
 
 	}
 
+	/**
+	 * Classe que armazena o token.
+	 * 
+	 * @author jd-davi
+	 *
+	 */
 	private class LoginResponse {
 		public String token;
 

@@ -10,6 +10,12 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+/**
+ * classe que sera uma tabela no banco de dados para armazenar os usuarios.
+ * 
+ * @author jd-davi
+ *
+ */
 @Entity
 public class Usuario {
 

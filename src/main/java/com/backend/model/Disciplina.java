@@ -11,6 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+/**
+ * classe que sera uma tabela no banco de dados para armazenar as Disciplinas.
+ * 
+ * @author jd-davi
+ *
+ */
 @Entity
 public class Disciplina {
 

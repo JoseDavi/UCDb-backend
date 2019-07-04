@@ -15,6 +15,12 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+/**
+ * classe que sera uma tabela no banco de dados para armazenar os comentarios.
+ * 
+ * @author jd-davi
+ *
+ */
 @Entity
 public class Comentario {
 

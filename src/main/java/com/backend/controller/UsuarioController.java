@@ -19,6 +19,12 @@ import com.backend.exceptions.usuarioNotFoundException;
 import com.backend.model.Usuario;
 import com.backend.service.UsuarioService;
 
+/**
+ * Classe que controla as requisicoes referentes a Usuario.
+ * 
+ * @author jd-davi
+ *
+ */
 @RestController
 @RequestMapping({ "/v1/users" })
 public class UsuarioController {
@@ -32,6 +38,12 @@ public class UsuarioController {
 		this.usuarioService = usuarioService;
 	}
 
+	/**
+	 * Chama o metodo do service de usuario para pesquisar pelo email.
+	 * 
+	 * @param email: email do usuario.
+	 * @return: ResponseEntity<Usuario>
+	 */
 	@GetMapping(value = "/{email}")
 	@ResponseBody
 	public ResponseEntity<Usuario> findByemail(@PathVariable String email) {
@@ -44,6 +56,12 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
 	}
 
+	/**
+	 * Chama o metodo do service de usuario para salvar um usuario e chamar o controller de email para enviar o email de confimacao.
+	 * 
+	 * @param usuario: usuario.json
+	 * @return: ResponseEntity<Usuario>
+	 */
 	@PostMapping(value = "/")
 	@ResponseBody
 	public ResponseEntity<Usuario> save(@RequestBody Usuario usuario) {

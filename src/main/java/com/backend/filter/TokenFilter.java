@@ -13,6 +13,12 @@ import org.springframework.web.filter.GenericFilterBean;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureException;
 
+/**
+ * Classe responsavel por gerar o token de autenticacao.
+ * 
+ * @author jd-davi
+ *
+ */
 public class TokenFilter extends GenericFilterBean {
 
 	@Override
